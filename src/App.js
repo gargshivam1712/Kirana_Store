@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {Routes, Route } from "react-router-dom";
 import Dashboard from "./component/Dashboard";
 import SearchPage from "./component/SearchPage";
 import NavBar from "./component/NavBar";
