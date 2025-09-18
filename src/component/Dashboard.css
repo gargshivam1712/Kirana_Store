@@ -1,0 +1,110 @@
+body {
+  background: #f8f9fa;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  background: #34495e;
+  padding: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.dashboard {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr) auto;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form input,
+.form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.btn {
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.items-table th,
+.items-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.items-table th {
+  background-color: #34495e;
+  color: white;
+}
+
+.items-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.items-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.btn.edit {
+  background: #f39c12;
+  margin-right: 5px;
+}
+
+.btn.delete {
+  background: #e74c3c;
+}
+
+.no-items {
+  text-align: center;
+  color: #888;
+  padding: 15px;
+}
