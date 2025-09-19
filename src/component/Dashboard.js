@@ -135,51 +135,53 @@ class Dashboard extends Component {
         </div>
 
         {/* Table */}
-        <table className="items-table">
-          <thead>
-            <tr>
-              <th>Item Name</th>
-              <th>Price (₹)</th>
-              <th>Market Price (₹)</th>
-              <th>Discount Price (₹)</th>
-              <th>Weight Type</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredItems.length > 0 ? (
-              filteredItems.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.itemName}</td>
-                  <td>{item.itemPrice}</td>
-                  <td>{item.marketPrice}</td>
-                  <td>{item.discountPrice}</td>
-                  <td>{item.itemWeightType}</td>
-                  <td>
-                    <button
-                      className="btn edit"
-                      onClick={() => this.handleEdit(item)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="btn delete"
-                      onClick={() => this.handleDelete(item.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
+        <div className="table-wrapper">
+            <table className="items-table">
+            <thead>
+                <tr>
+                <th>Item Name</th>
+                <th>Price (₹)</th>
+                <th>Market Price (₹)</th>
+                <th>Discount Price (₹)</th>
+                <th>Weight Type</th>
+                <th>Actions</th>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6" className="no-items">
-                  No items found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+                {filteredItems.length > 0 ? (
+                filteredItems.map((item) => (
+                    <tr key={item.id}>
+                    <td>{item.itemName}</td>
+                    <td>{item.itemPrice}</td>
+                    <td>{item.marketPrice}</td>
+                    <td>{item.discountPrice}</td>
+                    <td>{item.itemWeightType}</td>
+                    <td>
+                        <button
+                        className="btn edit"
+                        onClick={() => this.handleEdit(item)}
+                        >
+                        Edit
+                        </button>
+                        <button
+                        className="btn delete"
+                        onClick={() => this.handleDelete(item.id)}
+                        >
+                        Delete
+                        </button>
+                    </td>
+                    </tr>
+                ))
+                ) : (
+                <tr>
+                    <td colSpan="6" className="no-items">
+                    No items found.
+                    </td>
+                </tr>
+                )}
+            </tbody>
+            </table>
+        </div>
       </div>
     );
   }

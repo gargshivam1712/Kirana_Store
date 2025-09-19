@@ -1,110 +1,247 @@
+/* Dashboard.css - Responsive (desktop + mobile) */
+
+/* --- Variables --- */
+:root{
+  --bg: #f8f9fa;
+  --card: #ffffff;
+  --muted: #888;
+  --text: #2c3e50;
+  --accent: #27ae60;
+  --accent-strong: #1e8a45;
+  --warning: #f39c12;
+  --danger: #e74c3c;
+  --header-bg: #34495e;
+  --table-head-bg: #2c3e50;
+  --radius: 8px;
+  --gap: 12px;
+}
+
+/* --- Base --- */
+* { box-sizing: border-box; }
 body {
-  background: #f8f9fa;
   margin: 0;
-  font-family: Arial, sans-serif;
+  background: var(--bg);
+  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
 .navbar {
-  background: #34495e;
-  padding: 10px;
+  background: var(--header-bg);
+  padding: 12px 16px;
   display: flex;
-  gap: 15px;
+  gap: 18px;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
-
 .navbar a {
-  color: white;
+  color: #fff;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
+.navbar a:hover { text-decoration: underline; }
 
-.navbar a:hover {
-  text-decoration: underline;
-}
-
+/* --- Container --- */
 .dashboard {
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px;
+  max-width: 1100px;
+  margin: 18px auto;
+  padding: 18px;
+  padding-top: 100px;
 }
 
+/* --- Headline --- */
 h1 {
   text-align: center;
-  margin-bottom: 20px;
-  color: #2c3e50;
+  margin: 6px 0 18px;
+  color: var(--text);
+  font-size: 1.4rem;
+  font-weight: 700;
 }
 
+/* --- Search bar --- */
 .search-bar {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border: 1px solid #d0d6db;
+  border-radius: 10px;
+  background: var(--card);
+  font-size: 0.98rem;
+  outline: none;
+  transition: box-shadow .15s;
+}
+.search-bar:focus {
+  box-shadow: 0 6px 18px rgba(39,174,96,0.08);
+  border-color: var(--accent);
 }
 
+/* --- Form --- */
+/* Desktop: grid with all fields in a row */
 .form {
   display: grid;
-  grid-template-columns: repeat(6, 1fr) auto;
-  gap: 10px;
-  margin-bottom: 20px;
+  grid-template-columns: 1.4fr 0.9fr 0.9fr 0.9fr 0.9fr auto;
+  gap: var(--gap);
+  margin-bottom: 18px;
+  align-items: center;
 }
 
+/* Inputs & selects */
 .form input,
 .form select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 10px 12px;
+  border: 1px solid #d0d6db;
+  border-radius: 10px;
+  background: var(--card);
+  font-size: 0.96rem;
+  outline: none;
+}
+.form input:focus,
+.form select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 6px 18px rgba(39,174,96,0.06);
 }
 
+/* Buttons */
 .btn {
-  background: #27ae60;
+  background: var(--accent);
   color: white;
   border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
+  padding: 10px 14px;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background .12s, transform .08s;
 }
+.btn:hover { background: var(--accent-strong); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn.edit { background: var(--warning); }
+.btn.delete { background: var(--danger); }
 
-.btn:hover {
-  opacity: 0.9;
+/* --- Table --- */
+/* make table horizontally scrollable on small screens */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: transparent;
+  -webkit-overflow-scrolling: touch;
 }
 
 .items-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  min-width: 820px; /* ensures columns keep reasonable width before scrolling */
+  margin-top: 8px;
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 .items-table th,
 .items-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
+  border-bottom: 1px solid #eef2f4;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 0.95rem;
+  vertical-align: middle;
 }
 
-.items-table th {
-  background-color: #34495e;
-  color: white;
+.items-table thead th {
+  background: var(--table-head-bg);
+  color: #fff;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
-.items-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+.items-table tbody tr:nth-child(even){
+  background: #fbfcfd;
+}
+.items-table tr:hover { background: #f6f8f9; }
+
+/* Actions cell */
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
-.items-table tr:hover {
-  background-color: #f1f1f1;
-}
-
-.btn.edit {
-  background: #f39c12;
-  margin-right: 5px;
-}
-
-.btn.delete {
-  background: #e74c3c;
-}
-
+/* Empty state */
 .no-items {
   text-align: center;
-  color: #888;
-  padding: 15px;
+  color: var(--muted);
+  padding: 16px;
 }
+
+/* --- Responsive: Mobile & Small Tablets --- */
+@media (max-width: 900px) {
+  .dashboard {
+    padding: 12px;
+    margin: 12px;
+    padding-top: 80px;
+  }
+
+  h1 { font-size: 1.2rem; }
+
+  /* Stack form fields vertically for small screens */
+  .form {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .form input,
+  .form select,
+  .btn {
+    width: 100%;
+  }
+
+  /* Smaller paddings for inputs */
+  .search-bar { padding: 10px; }
+  .form input, .form select { padding: 10px; }
+
+  /* Table becomes scrollable, reduce min-width so it fits better */
+  .items-table { min-width: 640px; }
+  .items-table th, .items-table td { padding: 10px; font-size: 0.92rem; }
+
+  /* Make action buttons bigger for touch */
+  .actions-cell .btn {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+}
+
+/* Very small screens (phones) */
+@media (max-width: 480px) {
+  .form { gap: 8px; }
+  h1 { font-size: 1.06rem; }
+
+  .items-table th, .items-table td { padding: 8px; font-size: 0.88rem; }
+
+  /* Make table more compact */
+  .items-table thead th:nth-child(2),
+  .items-table thead th:nth-child(3),
+  .items-table thead th:nth-child(4) {
+    white-space: nowrap;
+  }
+
+  /* Improve focus outlines for accessibility */
+  .btn:focus, .search-bar:focus, .form input:focus, .form select:focus {
+    outline: 3px solid rgba(39,174,96,0.12);
+    outline-offset: 2px;
+  }
+}
+
+/* --- Optional: Card fallback for very narrow screens (if you prefer cards) --- */
+/* Uncomment below and hide the table on very small widths if you want a stacked card view */
+/*
+@media (max-width: 420px) {
+  .table-wrapper { display: none; }
+  .items-list-cards { display: block; }
+  .item-card { margin-bottom: 12px; padding: 12px; border-radius: 10px; background: var(--card); box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+}
+*/
