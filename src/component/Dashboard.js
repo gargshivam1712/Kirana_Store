@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./Dashboard.css";
+import axios from "axios"
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       newItem: {
-        id: null,
+        _id: null,
         itemName: "",
         itemPrice: "",
         marketPrice: "",
@@ -24,23 +25,55 @@ class Dashboard extends Component {
     }));
   };
 
-  handleSubmit = () => {
+  handleSubmit = async (e) => {
+    e.preventDefault();
     const { newItem, editMode } = this.state;
     const { items, setItems } = this.props;
 
+    const _id = newItem._id
+    const itemName = newItem.itemName
+    const itemPrice = newItem.itemPrice
+    const marketPrice = newItem.marketPrice
+    const discountPrice = newItem.discountPrice
+    const itemWeightType = newItem.itemWeightType
+    
     if (editMode) {
-      const updatedItems = items.map((item) =>
-        item.id === newItem.id ? newItem : item
-      );
-      setItems(updatedItems);
+      try {
+        
+
+        await axios.put(`https://dharaubaba-server.netlify.app/.netlify/functions/app/api/items/${_id}`, {
+          itemName,
+          itemPrice,
+          marketPrice,
+          discountPrice,
+          itemWeightType,
+        });
+        const updatedItems = items.map((item) =>
+        item._id === newItem._id ? newItem : item
+        );
+        setItems(updatedItems);
+      } catch (err) {
+        console.error("Error adding item", err);
+      }
+      
     } else {
-      const newEntry = { ...newItem, id: Date.now() };
-      setItems([...items, newEntry]);
+      try {
+        const res = await axios.post("https://dharaubaba-server.netlify.app/.netlify/functions/app/api/items", {
+          itemName,
+          itemPrice,
+          marketPrice,
+          discountPrice,
+          itemWeightType,
+        });
+        setItems([...items, res.data]);
+      } catch (err) {
+        console.error("Error adding item", err);
+      }
     }
 
     this.setState({
       newItem: {
-        id: null,
+        _id: null,
         itemName: "",
         itemPrice: "",
         marketPrice: "",
@@ -55,9 +88,14 @@ class Dashboard extends Component {
     this.setState({ newItem: item, editMode: true });
   };
 
-  handleDelete = (id) => {
-    const { items, setItems } = this.props;
-    setItems(items.filter((item) => item.id !== id));
+  handleDelete = async (_id) => {
+    try {
+      await axios.delete(`https://dharaubaba-server.netlify.app/.netlify/functions/app/api/items/${_id}`);
+      const { items, setItems } = this.props;
+      setItems(items.filter((item) => item._id !== _id));
+    } catch (err) {
+      console.error("Error deleting item", err);
+    }
   };
 
   handleSearchChange = (e) => {
@@ -150,7 +188,7 @@ class Dashboard extends Component {
             <tbody>
                 {filteredItems.length > 0 ? (
                 filteredItems.map((item) => (
-                    <tr key={item.id}>
+                    <tr key={item._id}>
                     <td>{item.itemName}</td>
                     <td>{item.itemPrice}</td>
                     <td>{item.marketPrice}</td>
@@ -165,7 +203,7 @@ class Dashboard extends Component {
                         </button>
                         <button
                         className="btn delete"
-                        onClick={() => this.handleDelete(item.id)}
+                        onClick={() => this.handleDelete(item._id)}
                         >
                         Delete
                         </button>

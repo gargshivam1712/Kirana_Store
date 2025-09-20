@@ -45,7 +45,7 @@ class SearchPage extends Component {
           <tbody>
             {filteredItems.length > 0 ? (
               filteredItems.map((item) => (
-                <tr key={item.id}>
+                <tr key={item._id}>
                   <td>{item.itemName}</td>
                   <td>{item.marketPrice}</td>
                   <td>{item.discountPrice}</td>
