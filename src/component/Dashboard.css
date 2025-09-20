@@ -117,8 +117,8 @@ h1 {
 }
 .btn:hover { background: var(--accent-strong); transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
-.btn.edit { background: var(--warning); margin-left: 8px; }
-.btn.delete { background: var(--danger); margin-left: 8px; }
+.btn.edit { background: var(--warning); margin: 2px; }
+.btn.delete { background: var(--danger); margin: 2px; }
 
 /* --- Table --- */
 /* make table horizontally scrollable on small screens */

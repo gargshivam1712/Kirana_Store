@@ -21,7 +21,7 @@ class App extends React.Component {
 
   fetchItems = async () => {
     try {
-      const res = await axios.get("https://dharaubaba-server.netlify.app/.netlify/functions/app/api/items");
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/items`);
       this.setState({ items: res.data });
     } catch (err) {
       console.error("Error fetching items", err);

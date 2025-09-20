@@ -41,7 +41,7 @@ class Dashboard extends Component {
       try {
         
 
-        await axios.put(`https://dharaubaba-server.netlify.app/.netlify/functions/app/api/items/${_id}`, {
+        await axios.put(`${process.env.REACT_APP_API_URL}/items/${_id}`, {
           itemName,
           itemPrice,
           marketPrice,
@@ -58,14 +58,14 @@ class Dashboard extends Component {
       
     } else {
       try {
-        const res = await axios.post("https://dharaubaba-server.netlify.app/.netlify/functions/app/api/items", {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/items`, {
           itemName,
           itemPrice,
           marketPrice,
           discountPrice,
           itemWeightType,
         });
-        setItems([...items, res.data]);
+        setItems([res.data , ...items, ]);
       } catch (err) {
         console.error("Error adding item", err);
       }
@@ -90,7 +90,7 @@ class Dashboard extends Component {
 
   handleDelete = async (_id) => {
     try {
-      await axios.delete(`https://dharaubaba-server.netlify.app/.netlify/functions/app/api/items/${_id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/items/${_id}`);
       const { items, setItems } = this.props;
       setItems(items.filter((item) => item._id !== _id));
     } catch (err) {
